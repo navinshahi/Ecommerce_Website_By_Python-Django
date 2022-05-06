@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    {% block bootstrap %} {% endblock %}
+    <title>{% block title %} {% endblock %}</title>
+    {% block css %} {% endblock %}
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">My Awesome Cart</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/shop">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/shop/about">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/shop/tracker">Tracker</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/shop/contact">Contact Us</a>
+                    </li>
+                </ul>
+                <form method="get" action="/shop/search/" class="d-flex">
+                    <input name="search" id="search" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+                <button type="button" id="popcart" class="btn btn-secondary mx-3" data-bs-html="true" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom" title="Your Items in Cart" data-bs-content="Your Cart">
+                    Cart(<span id="cart">0</span>)
+                </button>
+                <button class="btn btn-primary" id="clearCart" onclick="clearCart()">Clear Cart</button>
+            </div>
+        </div>
+    </nav>
+    {% block body %} This isbody {% endblock %}
+    {% block js %} {% endblock %}
+
+</body>
+
+</html>

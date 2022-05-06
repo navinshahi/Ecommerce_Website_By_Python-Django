@@ -1,0 +1,65 @@
+{% extends 'shop/basic.html' %}
+{% block title %} {{product.product_name}} - My Awesome Cart {% endblock %}
+{% block bootstrap %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'shop/css/bootstrap.min.css' %}" type="text/css">
+<script src="{% static 'shop/jquery-3.6.0.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'shop/js/bootstrap.bundle.min.js' %}"></script>
+
+{% endblock %}
+{% block body %}
+<div class="container my-4">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="row">
+        <img src="/media/{{product.image}}" width="235px" height="335px">
+      </div>
+      <div class="row my-3">
+        <button class="col btn btn-primary">Buy Now</button>
+        <button class="col btn btn-primary mx-4">Add to Cart</button>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <h5>{{product.product_name}}</h5>
+      <p><b>Rs.</b> {{product.price}}/.</p>
+      <p>{{product.desc}}</p>
+    </div>
+  </div>
+</div>
+<script>
+  if (localStorage.getItem('cart') == null) {
+    var cart = {};
+  }
+  else {
+    cart = JSON.parse(localStorage.getItem('cart'));
+    var sum = 0;
+    for (var i in cart) {
+      sum += cart[i][0];
+    }
+    document.getElementById('cart').innerHTML = sum;
+  }
+
+  //Display Bootstrap Popover
+  var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
+  var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+    return new bootstrap.Popover(popoverTriggerEl);
+  });
+
+
+  $('.cart').click(function () {
+    var idstr = this.id.toString();
+    if (cart[idstr] != undefined) {
+      cart[idstr][0] += 1;
+    }
+    else {
+      cart[idstr][0] = 1;
+    }
+    localStorage.setItem('cart', JSON.stringify(cart));
+    var sum = 0;
+    for (var i in cart) {
+      sum += cart[i][0];
+    }
+    document.getElementById('cart').innerHTML = sum;
+  });
+</script>
+{% endblock %}

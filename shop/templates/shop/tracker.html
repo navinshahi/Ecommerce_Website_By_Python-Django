@@ -1,0 +1,62 @@
+{% extends 'shop/basic.html' %}
+{% block title %} My Awesome Cart Tracker {% endblock %}
+{% block bootstrap %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'shop/css/bootstrap.min.css' %}" type="text/css">
+<script src="{% static 'shop/jquery-3.6.0.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'shop/js/bootstrap.bundle.min.js' %}"></script>
+{% endblock %}
+{% block body %}
+
+<div class="container">
+    <div class="col my-3">
+        <h2>My Awesome Cart Tracker - Enter your Order id & Email address to track your order :</h2>
+        <form class="row g-3" method="post" action="/shop/tracker/" id="trackerForm">{% csrf_token %}
+            <div class="col-md-6">
+                <label for="inputName" class="form-label">Order Id</label>
+                <input type="name" class="form-control" id="OrderId" name="OrderId">
+            </div>
+            <div class="col-md-6">
+                <label for="inputEmail" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" name="email">
+            </div>
+            <div class={{msg}} id="submitErrorMessage">
+                <div class="text-center text-danger mb-3">Wrong Order id/Password Entered!! Please Enter a valid Order Id/Password & try again...</div>
+              </div>
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary">Track Order</button>
+            </div>
+        </form>
+    </div>
+    <div class="col my-3">
+        <h2>Your Order Status :</h2>
+        <div>
+            {% for i in update %}
+            <ul class="list-group" id="items">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    {{i.update_desc}}
+                    <span class="badge bg-primary rounded-pill">{{i.timestamp}}</span>
+                </li>
+            </ul>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="col my-3">
+        <h2>Your Order Details :</h2>
+        <div>
+            {% for i,j in orders.items %}
+            <ul class="list-group" id="items">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    {{j.1}}
+                    <span class="badge bg-primary rounded-pill">{{j.0}}</span>
+                </li>
+            </ul>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block js %}
+<script>
+</script>
+{% endblock %}
