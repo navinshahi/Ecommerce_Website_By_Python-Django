@@ -1,0 +1,20 @@
+Django Commands::-
+
+>>>To Start/Create Project:-
+django-admin startproject mysite
+
+>>>To Run Server:-
+python manage.py runserver
+
+>>>To create apps in the project:-
+python manage.py startapp blog
+
+>>>To store all migrations in a app:-
+python manage.py makemigrations
+
+>>>To migrate all functionality in the project:-
+python manage.py migrate
+
+>>>To create superuser:-
+python manage.py createsuperuser
+
